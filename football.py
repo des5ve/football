@@ -5,6 +5,9 @@ import numpy as np
 import pandas as pd
 from bs4 import BeautifulSoup
 from selenium import webdriver
+import mysql.connector
+import pymysql
+
 
 
 timeOfPosession = "https://www.teamrankings.com/college-football/stat/average-time-of-possession-net-of-ot"
@@ -71,3 +74,21 @@ for i, row in teamStats.iterrows():
       iterator +=1
     gameData.append(dataRow)
 print ("Data from Frame in Arrays:", gameData)
+
+
+mydb = mysql.connector.connect(
+  host="nfldb2.cke1iobwnywt.us-east-1.rds.amazonaws.com",
+  user="",
+  passwd="",
+    database= "BetTrack"
+)
+
+mycursor = mydb.cursor()
+
+truncateSQL = 'TRUNCATE TABLE college_football_teams'
+mycursor.execute(truncateSQL)
+sql = "INSERT INTO college_football_teams (TOP_Rank, Team, TOP_2020, TOP_Last_3, TOP_Last_1, TOP_Home, TOP_Away, TOP_2019, PlaysPerGame_Rank, PlaysPerGame_2020, PlaysPerGame_Last_3, PlaysPerGame_Last_1, PlaysPerGame_Home, PlaysPerGame_Away, PlaysPerGame_2019, YPP_Rank, YPP_2020, YPP_Last_3, YPP_Last_1, YPP_Home, YPP_Away, YPP_2019, YPPA_Rank, YPPA_2020, YPPA_Last_3, YPPA_Last_1, YPPA_Home, YPPA_Away, YPPA_2019, PassPercent_Rank, PassPercent_2020, PassPercent_Last_3, PassPercent_Last_1, PassPercent_Home, PassPercent_Away, PassPercent_2019, YardsPerPassAttempt_Rank, YardsPerPassAttempt_2020, YardsPerPassAttempt_Last_3, YardsPerPassAttempt_Last_1, YardsPerPassAttempt_Home, YardsPerPassAttempt_Away, YardsPerPassAttempt_2019, TakeAwaysPerGame_Rank, TakeAwaysPerGame_2020, TakeAwaysPerGame_Last_3, TakeAwaysPerGame_Last_1, TakeAwaysPerGame_Home, TakeAwaysPerGame_Away, TakeAwaysPerGame_2019, GiveAwaysPerGame_Rank, GiveAwaysPerGame_2020, GiveAwaysPerGame_Last_3, GiveAwaysPerGame_Last_1, GiveAwaysPerGame_Home, GiveAwaysPerGame_Away, GiveAwaysPerGame_2019, PuntYardsPerGame_Rank, PuntYardsPerGame_2020, PuntYardsPerGame_Last_3, PuntYardsPerGame_Last_1, PuntYardsPerGame_Home, PuntYardsPerGame_Away, PuntYardsPerGame_2019, PuntsPerGame_Rank, PuntsPerGame_2020, PuntsPerGame_Last_3, PuntsPerGame_Last_1, PuntsPerGame_Home, PuntsPerGame_Away, PuntsPerGame_2019) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+
+mycursor.executemany(sql, gameData)
+mydb.commit()
+print (mycursor.rowcount, "record inserted")
