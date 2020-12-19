@@ -78,8 +78,8 @@ print ("Data from Frame in Arrays:", gameData)
 
 mydb = mysql.connector.connect(
   host="nfldb2.cke1iobwnywt.us-east-1.rds.amazonaws.com",
-  user="des5ve",
-  passwd="Cm14fcfire",
+  user="",
+  passwd="",
     database= "BetTrack"
 )
 
