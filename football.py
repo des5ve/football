@@ -78,8 +78,8 @@ print ("Data from Frame in Arrays:", gameData)
 
 mydb = mysql.connector.connect(
   host="nfldb2.cke1iobwnywt.us-east-1.rds.amazonaws.com",
-  user="",
-  passwd="",
+  user="des5ve",
+  passwd="Cm14fcfire",
     database= "BetTrack"
 )
 
@@ -92,3 +92,5 @@ sql = "INSERT INTO college_football_teams (TOP_Rank, Team, TOP_2020, TOP_Last_3,
 mycursor.executemany(sql, gameData)
 mydb.commit()
 print (mycursor.rowcount, "record inserted")
+
+
