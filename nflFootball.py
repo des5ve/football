@@ -76,7 +76,7 @@ for name in columnNames:
 print (strings)
 
 
-mydb = mysql.connector.connect(
+mydb = pymysql.connect(
   host="nfldb2.cke1iobwnywt.us-east-1.rds.amazonaws.com",
   user="",
   password="",

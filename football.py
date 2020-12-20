@@ -76,7 +76,7 @@ for i, row in teamStats.iterrows():
 print ("Data from Frame in Arrays:", gameData)
 
 
-mydb = mysql.connector.connect(
+mydb = pymysql.connect(
   host="nfldb2.cke1iobwnywt.us-east-1.rds.amazonaws.com",
   user="",
   passwd="",
